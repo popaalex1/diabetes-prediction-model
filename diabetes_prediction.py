@@ -2,9 +2,8 @@ import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, accuracy_score, classification_report, confusion_matrix
-import xgboost as xgb
 from imblearn.over_sampling import SMOTE
-
+import xgboost as xgb
 
 file_path = Path.home() / "Documents" / "Proiect" / "dataset" / "diabetes_health_indicators.csv"
 df = pd.read_csv(file_path)
