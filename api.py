@@ -1,11 +1,21 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import xgboost as xgb
 import joblib
 
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class DiabetesInput(BaseModel):
-    Diabetes_012: float
     HighBP: float
     HighChol: float
     CholCheck: float
@@ -28,7 +38,6 @@ class DiabetesInput(BaseModel):
     Education: float
     Income: float
 
-app = FastAPI()
 model = joblib.load("diabetes_model.joblib")
 
 @app.post("/predict")
