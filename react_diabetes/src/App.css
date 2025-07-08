@@ -1,0 +1,141 @@
+body {
+  background: #f6fbff;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.app-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(100,180,255,0.08);
+  padding: 32px 24px;
+  max-width: 540px;
+  margin: 48px auto;
+}
+
+h1 {
+  text-align: center;
+  color: #3498db;
+  margin-bottom: 32px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #217dbb;
+}
+
+input[type="number"] {
+  padding: 8px 12px;
+  border: 1px solid #b3d8f7;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 4px;
+  transition: border 0.2s;
+  background: #f6fbff;
+}
+
+input[type="number"]:focus {
+  border: 1.5px solid #3498db;
+  outline: none;
+}
+
+button[type="submit"] {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #217dbb;
+}
+
+.result-box {
+  margin-top: 24px;
+  padding: 16px;
+  background: #e3f0fc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #217dbb;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(100,180,255,0.10);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+
+.form-grid button[type="submit"] {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+}
+
+.form-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.navbar {
+  width: 100vw;
+  left: 0;
+  top: 0;
+  position: relative;
+  background: #4a8ac6;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 24px 0 20px 0;
+  box-shadow: 0 4px 16px rgba(100,180,255,0.08);
+  z-index: 10;
+  margin-bottom: 0;
+}
+
+.navbar button {
+  background: #fff;
+  color: #3498db;
+  border: 2px solid #b3d8f7;
+  border-radius: 8px;
+  padding: 14px 38px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(100,180,255,0.08);
+  letter-spacing: 0.5px;
+}
+
+.navbar button:hover {
+  background: #e3f0fc;
+  color: #217dbb;
+  border: 2px solid #3498db;
+  transform: translateY(-2px) scale(1.06);
+}
+
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-col {
+    width: 100%;
+  }
+} 
