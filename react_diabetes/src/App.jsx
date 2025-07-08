@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
 const initialForm = {
@@ -25,11 +26,32 @@ const initialForm = {
   Income: 0,
 };
 
-function App() {
+function HomeSection() {
+  return (
+    <div className="home-section">
+      <img
+        src="https://www.tissupath.com.au//wp-content/uploads/Diabetes-Overview-1-768x768.png"
+        alt="Futuristic diabetes overview"
+        className="home-image"
+      />
+      <h1>Diabetes Health Predictor</h1>
+      <p>
+        Welcome to the Diabetes Health Predictor! This web application leverages advanced machine learning algorithms to help you assess your risk of developing diabetes based on a variety of health indicators. By entering your personal health data—such as blood pressure, cholesterol levels, BMI, lifestyle habits, and more—you will receive an instant prediction about your diabetes risk category.
+      </p>
+      <p>
+        Our goal is to empower you with personalized insights that can support early detection and prevention. The prediction is generated using a model trained on real-world health data, but it is not a substitute for professional medical advice. For any health concerns, please consult a healthcare provider.
+      </p>
+      <p>
+        To get started, simply navigate to the Prediction section, fill in the required fields, and click "Calculate" to see your result. Your privacy is important to us—no data is stored or shared.
+      </p>
+    </div>
+  );
+}
+
+function PredictionSection() {
   const [form, setForm] = useState(initialForm);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const formRef = useRef(null);
 
   const handleChange = (e) => {
@@ -54,74 +76,67 @@ function App() {
     setLoading(false);
   };
 
-  const handleNavClick = (section) => {
-    setActiveSection(section);
-    if (section === "prediction" && formRef.current) {
-      setTimeout(() => {
-        formRef.current.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    }
-  };
-
   return (
     <>
+      <img
+        src="https://cdn.analyticsvidhya.com/wp-content/uploads/2022/01/30738medtec-futuristic-650-672c56a896ab7.webp"
+        alt="Futuristic AI diabetes prediction"
+        className="prediction-image"
+      />
+      <h1>Diabetes Prediction</h1>
+      <form ref={formRef} onSubmit={handleSubmit} className="form-grid">
+        {Object.keys(initialForm).map((key) => (
+          <div key={key}>
+            <label>
+              {key}:
+              <input
+                type="number"
+                name={key}
+                value={form[key]}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+        ))}
+        <button type="submit" disabled={loading}>
+          {loading ? "Calculating..." : "Calculate"}
+        </button>
+      </form>
+      {result !== null && (
+        <div className="result-box">
+          <strong>Prediction:</strong> {result}
+        </div>
+      )}
+    </>
+  );
+}
+
+function ContactSection() {
+  return (
+    <div className="contact-section">
+      <h1>Contact</h1>
+      <p>For questions or feedback, please contact us at <a href="https://github.com/popaalex1">https://github.com/popaalex1</a>.</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
       <nav className="navbar">
-        <button onClick={() => handleNavClick("home")}>Home</button>
-        <button onClick={() => handleNavClick("prediction")}>Prediction</button>
-        <button onClick={() => handleNavClick("contact")}>Contact</button>
+        <Link to="/">Home</Link>
+        <Link to="/prediction">Prediction</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
       <div className="app-container">
-        {activeSection === "home" && (
-          <div className="home-section">
-            <h1>Diabetes Health Predictor</h1>
-            <p>
-              Welcome to the Diabetes Health Predictor! This web application leverages advanced machine learning algorithms to help you assess your risk of developing diabetes based on a variety of health indicators. By entering your personal health data—such as blood pressure, cholesterol levels, BMI, lifestyle habits, and more—you will receive an instant prediction about your diabetes risk category.
-            </p>
-            <p>
-              Our goal is to empower you with personalized insights that can support early detection and prevention. The prediction is generated using a model trained on real-world health data, but it is not a substitute for professional medical advice. For any health concerns, please consult a healthcare provider.
-            </p>
-            <p>
-              To get started, simply navigate to the Prediction section, fill in the required fields, and click "Calculate" to see your result. Your privacy is important to us—no data is stored or shared.
-            </p>
-          </div>
-        )}
-        {activeSection === "prediction" && (
-          <>
-            <h1>Diabetes Prediction</h1>
-            <form ref={formRef} onSubmit={handleSubmit} className="form-grid">
-              {Object.keys(initialForm).map((key) => (
-                <div key={key}>
-                  <label>
-                    {key}:
-                    <input
-                      type="number"
-                      name={key}
-                      value={form[key]}
-                      onChange={handleChange}
-                      required
-                    />
-                  </label>
-                </div>
-              ))}
-              <button type="submit" disabled={loading}>
-                {loading ? "Calculating..." : "Calculate"}
-              </button>
-            </form>
-            {result !== null && (
-              <div className="result-box">
-                <strong>Prediction:</strong> {result}
-              </div>
-            )}
-          </>
-        )}
-        {activeSection === "contact" && (
-          <div className="contact-section">
-            <h1>Contact</h1>
-            <p>For questions or feedback, please contact us at <a href="mailto:contact@diabetespredictor.com">https://github.com/popaalex1</a>.</p>
-          </div>
-        )}
+        <Routes>
+          <Route path="/" element={<HomeSection />} />
+          <Route path="/prediction" element={<PredictionSection />} />
+          <Route path="/contact" element={<ContactSection />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 

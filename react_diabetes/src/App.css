@@ -131,6 +131,52 @@ button[type="submit"]:hover {
   transform: translateY(-2px) scale(1.06);
 }
 
+.navbar a {
+  background: #fff;
+  color: #3498db;
+  border: 2px solid #b3d8f7;
+  border-radius: 8px;
+  padding: 14px 38px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(100,180,255,0.08);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  margin: 0 2px;
+  display: inline-block;
+}
+
+.navbar a:hover, .navbar a.active {
+  background: #e3f0fc;
+  color: #217dbb;
+  border: 2px solid #3498db;
+  transform: translateY(-2px) scale(1.06);
+}
+
+.home-image {
+  display: block;
+  margin: 0 auto 24px auto;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 16px;
+  max-height: 320px;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(52,152,219,0.10);
+}
+
+.prediction-image {
+  display: block;
+  margin: 0 auto 24px auto;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  max-height: 280px;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(52,152,219,0.10);
+}
+
 @media (max-width: 700px) {
   .form-grid {
     grid-template-columns: 1fr;
